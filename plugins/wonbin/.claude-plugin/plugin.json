@@ -1,0 +1,9 @@
+{
+  "name": "wonbin",
+  "version": "0.1.0",
+  "description": "Design, TDD, two-axis review, grilling and visual explanation skills.",
+  "author": {
+    "name": "Wonbin Kim"
+  },
+  "license": "MIT"
+}

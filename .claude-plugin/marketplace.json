@@ -1,0 +1,16 @@
+{
+  "name": "wonbin-skills",
+  "owner": {
+    "name": "Wonbin Kim"
+  },
+  "metadata": {
+    "description": "Agent skills Wonbin uses day to day."
+  },
+  "plugins": [
+    {
+      "name": "wonbin",
+      "source": "./plugins/wonbin",
+      "description": "Design, TDD, two-axis review, grilling and visual explanation skills."
+    }
+  ]
+}
