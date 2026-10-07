@@ -1,7 +1,7 @@
 {
   "name": "wonbin",
-  "version": "0.1.0",
-  "description": "Design, TDD, two-axis review, grilling and visual explanation skills.",
+  "version": "0.2.0",
+  "description": "Design, TDD, two-axis review, PR comments, grilling and visual explanation skills.",
   "author": {
     "name": "Wonbin Kim"
   },

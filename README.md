@@ -36,6 +36,7 @@ bump `version` in `plugin.json` so installed copies pick up the change.
 | `grilling`        | Interview the user round by round to stress-test a plan         | [mattpocock/skills](https://github.com/mattpocock/skills/blob/main/skills/productivity/grilling/SKILL.md)       |
 | `grill-me`        | User-invocable entry point (`/wonbin:grill-me`) for `grilling`  | [mattpocock/skills](https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md)       |
 | `show-me`         | Explain the current topic with diagrams and small HTML views    | [humanlayer/skills](https://github.com/humanlayer/skills/blob/main/plugins/show-me/skills/show-me/SKILL.md)     |
+| `pr-comment`      | Post a two-axis review as inline PR comments (`/wonbin:pr-comment`) | Local                                                                                                           |
 
 All vendored skills are MIT licensed; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
@@ -44,8 +45,10 @@ All vendored skills are MIT licensed; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_N
 - `tdd` calls `codebase-design` for its module/seam vocabulary. It also points at the
   built-in `code-review` skill, which needs no vendoring.
 - `grill-me` only delegates to `grilling`, which holds the instructions.
+- `pr-comment` runs `two-axis-review` for the findings and uses `show-me` formats in
+  each comment body.
 
-Both pairs ship in the same plugin, so they cannot be installed apart.
+All of these ship in the same plugin, so they cannot be installed apart.
 
 ### Local changes to vendored skills
 
