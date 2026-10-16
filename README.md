@@ -37,7 +37,7 @@ bump `version` in `plugin.json` so installed copies pick up the change.
 | `grill-me`        | User-invocable entry point (`/wonbin:grill-me`) for `grilling`  | [mattpocock/skills](https://github.com/mattpocock/skills/blob/main/skills/productivity/grill-me/SKILL.md)       |
 | `show-me`         | Explain the current topic with diagrams and small HTML views    | [humanlayer/skills](https://github.com/humanlayer/skills/blob/main/plugins/show-me/skills/show-me/SKILL.md)     |
 | `pr-comment`      | Post a two-axis review as inline PR comments (`/wonbin:pr-comment`) | Local                                                                                                           |
-| `spec-discuss`    | Interview the user and write a task spec with a fixed markdown shape | Local                                                                                                           |
+| `spec-discuss`    | Draft the business-logic shape visually, align, then expand it into a task spec | Local                                                                                                           |
 | `spec-to-code`    | Implement a ready spec with test-author / developer / reviewer / refuter sub-agents and open a draft PR (`/wonbin:spec-to-code`) | Local |
 | `good-code`       | Reference on what good code is, architecturally: dependency direction, seams, contracts, vocabulary, failure, ownership, enforcement. Information only | Local |
 | `merge-decision`  | Handoff card for a maintainer who will not read the diff: risk tier, evidence vs CI, not-verified list | Local |
