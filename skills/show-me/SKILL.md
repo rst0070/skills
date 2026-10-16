@@ -55,6 +55,15 @@ sequenceDiagram
     Daemon-->>UI: stream result
 ```
 
+```mermaid
+flowchart LR
+    A["parseArgs(argv)"] --> B{"cached?"}
+    B -->|yes| C[return cached result]
+    B -->|no| D["run(skill), then cache"]
+```
+
+Keep Mermaid text plain so it parses. Mermaid reads `;` as the end of a statement, so never put `;` in a label or message. Reword it instead ("validate, then save"), or split it into two messages. In flowcharts, wrap any label that has `( ) [ ] { } < > # :` in double quotes: `A["parse(input)"]`. Don't name a node `end`.
+
 - Use `diff` when the point is what changes and the surrounding shape already exists. Match the diff shape to the topic.
 
 For a component change:
