@@ -39,6 +39,7 @@ bump `version` in `plugin.json` so installed copies pick up the change.
 | `pr-comment`      | Post a two-axis review as inline PR comments (`/wonbin:pr-comment`) | Local                                                                                                           |
 | `spec-discuss`    | Interview the user and write a task spec with a fixed markdown shape | Local                                                                                                           |
 | `spec-to-code`    | Implement a ready spec with test-author / developer / reviewer / refuter sub-agents and open a draft PR (`/wonbin:spec-to-code`) | Local |
+| `good-code`       | Reference on what good code is, architecturally: dependency direction, seams, contracts, vocabulary, failure, ownership, enforcement. Information only | Local |
 | `merge-decision`  | Handoff card for a maintainer who will not read the diff: risk tier, evidence vs CI, not-verified list | Local |
 
 All vendored skills are MIT licensed; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
@@ -51,7 +52,7 @@ All vendored skills are MIT licensed; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_N
 - `pr-comment` runs `two-axis-review` for the findings and uses `show-me` formats in
   each comment body.
 
-- `spec-discuss`, `spec-to-code` and `merge-decision` are self-contained: they load no
+- `spec-discuss`, `spec-to-code`, `merge-decision` and `good-code` are self-contained: they load no
   other skill, so each can be copied to another plugin on its own.
 
 All of these ship in the same plugin, so they cannot be installed apart.
