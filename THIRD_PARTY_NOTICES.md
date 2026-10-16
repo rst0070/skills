@@ -1,6 +1,6 @@
 # Third-party notices
 
-Skills in `plugins/wonbin/skills/` are vendored from the projects below under the MIT
+Skills in `skills/` are vendored from the projects below under the MIT
 License. Copyright notices are reproduced as the license requires.
 
 ## mattpocock/skills

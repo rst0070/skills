@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "wonbin",
-      "source": "./plugins/wonbin",
+      "source": "./",
       "description": "Design, TDD, two-axis review, grilling and visual explanation skills."
     }
   ]
