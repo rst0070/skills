@@ -17,13 +17,13 @@ Installed skills are namespaced by the plugin: `wonbin:tdd`, `/wonbin:grill-me`,
 ## Layout
 
 ```
-.claude-plugin/marketplace.json   # the marketplace: lists the plugins below
-plugins/wonbin/
-  .claude-plugin/plugin.json
-  skills/<name>/SKILL.md          # one directory per skill, auto-discovered
+.claude-plugin/
+  marketplace.json         # the marketplace: lists the plugin at ./
+  plugin.json              # the repo root is the plugin
+skills/<name>/SKILL.md     # one directory per skill, auto-discovered
 ```
 
-To add a skill, drop a directory with a `SKILL.md` into `plugins/wonbin/skills/` and
+To add a skill, drop a directory with a `SKILL.md` into `skills/` and
 bump `version` in `plugin.json` so installed copies pick up the change.
 
 ## Skills
