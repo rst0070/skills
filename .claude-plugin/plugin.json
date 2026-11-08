@@ -1,6 +1,6 @@
 {
   "name": "wonbin",
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Design, TDD, two-axis review, PR comments, spec-discuss / spec-to-code / merge-decision loop, grilling and visual explanation skills.",
   "author": {
     "name": "Wonbin Kim"
