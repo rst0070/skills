@@ -61,32 +61,62 @@ Send `STANDS` findings to a fresh developer sub-agent with the same rules as 1b.
 
 ### 1f. Open the draft PR
 
-Push the branch and open a **draft** PR against the base branch. Body:
+Push the branch and open a **draft** PR against the base branch.
 
-```markdown
+**Shape of the change.** A reviewer should see what got built before reading any code. Draw it from the actual diff, not from the spec. If the two disagree, the reviewer needs to see that. Pick the one or two views that make the change clear, never all of them:
+
+- a `diff` of pseudocode or a call tree, when behavior changed
+- a `mermaid` flowchart or sequence diagram, when control flow branches or crosses components
+- a `diff` of the file tree, when files were added, moved, or removed
+
+Tag each AC where it lives in the visual (`# AC-1` in a diff, `|"yes, AC-1"|` on a Mermaid edge), so the AC table can point at it. Never paste a raw `git diff`. GitHub's Files tab already shows that, and these blocks show the shape of the code.
+
+Keep Mermaid text plain so it parses, because a broken diagram renders as an error box. Never put `;` in a label or message, since Mermaid reads it as the end of a statement. Wrap any label that contains `( ) [ ] { } < > # :` in double quotes: `A["save(doc)"]`. Don't name a node `end`.
+
+Body:
+
+````markdown
 ## Intent
-<spec intent, one paragraph>
+<spec intent, one or two sentences>
 
-## Acceptance criteria
-| AC | Test | Status |
-| AC-1 | tests/.../test_x.py::test_ac_1 | pass |
+## Shape of the change
 
-## Evidence
+```diff
+ on(save)
+-  write content
++  if hash(content) == cache.hash        # AC-1
++    return cache.result
++  write new content
++  cache.set(hash, result)               # AC-2
+```
+
+```mermaid
+flowchart LR
+    A["save(doc)"] --> B{"hash matches cache?"}
+    B -->|"yes, AC-1"| C[return cached result]
+    B -->|"no"| D[write content]
+    D --> E["update cache, AC-2"]
+```
+
+## AC map
+| AC | Where in the shape | Test | Status |
+|----|--------------------|------|--------|
+| AC-1 | cache-hit branch | tests/.../test_x.py::test_ac_1 | pass |
+
+## Needs a human
+- **Not verified:** <what no test or run covered; "None" is a claim, blank is not allowed>
+- **Decided without the author:** <judgement calls where the spec was silent; "None" if none>
+
+<details><summary>Evidence</summary>
+
 - tests: `<command>` exit 0 at <sha>, CI: <check name>
 - lint: `<command>` exit 0 at <sha>
+- out-of-scope changes: <files touched outside spec scope; should be "None">
+- review: <findings that STOOD and how each was fixed: "fixed in <sha>" / "kept because <reason>">
+</details>
+````
 
-## Not verified
-<what no test or run covered; "None" is a claim, blank is not allowed>
-
-## Decisions made without the author
-<judgement calls the sub-agents made where the spec was silent>
-
-## Out-of-scope changes
-<files touched outside spec scope; should be "None">
-
-## Review
-<findings that STOOD and how each was fixed: "fixed in <sha>" / "kept because <reason>">
-```
+The visuals above are an example of the format. Replace them with the shape of this PR.
 
 Print the PR URL. Then continue with the next slice, branching from this slice's branch if the plan says the slices stack, otherwise from the base branch.
 
