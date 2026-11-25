@@ -4,27 +4,49 @@ Agent skills I use day to day, packaged as a Claude Code plugin marketplace.
 
 ## Install
 
-```
-/plugin marketplace add rst0070/skills
-/plugin install wonbin@wonbin-skills
-```
+One repo, one `skills/` folder. Each harness finds it through its own manifest.
 
-To try a local checkout instead, run `/plugin marketplace add ./` from the repo root.
-Check the manifests with `claude plugin validate .`.
+| Harness | Install | Status |
+| ------- | ------- | ------ |
+| Claude Code | `/plugin marketplace add rst0070/skills` then `/plugin install wonbin@wonbin-skills` | *verified* |
+| Codex | `codex plugin marketplace add rst0070/skills` (reads `plugin.json`) | *documented, untested* |
+| Gemini CLI | `gemini extensions install https://github.com/rst0070/skills` (reads `gemini-extension.json`) | *documented, untested* |
+| Copilot CLI | `copilot plugin marketplace add rst0070/skills` then `copilot plugin install wonbin@wonbin-skills` | *documented, untested* |
+| Cursor | Add `rst0070/skills` as a plugin from GitHub (reads `plugin.json`) | *documented, untested* |
+| npx skills | `npx skills add rst0070/skills` (OpenCode, Amp, Goose, Cline, Kiro, Windsurf and others) | *verified* |
 
-Installed skills are namespaced by the plugin: `wonbin:tdd`, `/wonbin:grill-me`, and so on.
+*Verified* means the install was run against this repo. *Documented, untested* means
+the line follows the vendor's docs; change it to *verified* once someone installs it.
+
+To try a local checkout instead, run `/plugin marketplace add ./` from the repo root
+(or `gemini extensions link .`, `codex plugin marketplace add ./`, `npx skills add . --list`).
+Check the manifests with `claude plugin validate .` and `python3 .github/scripts/validate.py`.
+
+Installed skills are namespaced by the plugin in Claude Code: `wonbin:tdd`, `/wonbin:grill-me`, and so on.
+
+### Known limitations
+
+- Copilot CLI ignores `disable-model-invocation: true`
+  ([github/copilot-cli#4438](https://github.com/github/copilot-cli/issues/4438)), so it
+  may run the manual-only skills (`grill-me`, `pr-comment`, `spec-to-code`,
+  `spec-to-code-light`) without being asked. The flag is kept because the other
+  harnesses honour it.
 
 ## Layout
 
 ```
 .claude-plugin/
   marketplace.json         # the marketplace: lists the plugin at ./
-  plugin.json              # the repo root is the plugin
+  plugin.json              # Claude Code manifest: the repo root is the plugin
+plugin.json                # Agent Plugins manifest (Codex, Cursor, Copilot CLI)
+gemini-extension.json      # Gemini CLI manifest
+.github/workflows/validate.yml  # CI: versions match, SKILL.md frontmatter valid
 skills/<name>/SKILL.md     # one directory per skill, auto-discovered
 ```
 
-To add a skill, drop a directory with a `SKILL.md` into `skills/` and
-bump `version` in `plugin.json` so installed copies pick up the change.
+To add a skill, drop a directory with a `SKILL.md` into `skills/` and bump
+`version` in all three manifests so installed copies pick up the change. CI fails
+if the three versions differ.
 
 ## Skills
 

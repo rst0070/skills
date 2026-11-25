@@ -31,7 +31,6 @@ SKILLS = {
 }
 VERSION = "0.6.0"
 
-red = pytest.mark.xfail(strict=True, raises=AssertionError)
 
 
 def read_json(rel):
@@ -50,7 +49,6 @@ def run_validate(root):
     )
 
 
-@red
 def test_ac_1_claude_plugin_validates_with_12_skills():
     manifest = read_json(".claude-plugin/plugin.json")
     assert manifest["name"] == "wonbin"
@@ -66,7 +64,6 @@ def test_ac_1_claude_plugin_validates_with_12_skills():
     assert result.returncode == 0, result.stdout + result.stderr
 
 
-@red
 def test_ac_2_root_manifests_name_wonbin_and_share_version():
     claude_version = read_json(".claude-plugin/plugin.json")["version"]
     plugin = read_json("plugin.json")
@@ -84,7 +81,6 @@ def test_ac_2_root_manifests_name_wonbin_and_share_version():
     assert gemini["version"] == claude_version
 
 
-@red
 def test_ac_3_gemini_and_codex_manifests_are_discoverable():
     # Installing in Gemini CLI and Codex needs those CLIs; this checks only the
     # files each one reads. The install itself is a manual step in the PR.
@@ -94,7 +90,6 @@ def test_ac_3_gemini_and_codex_manifests_are_discoverable():
     assert found == SKILLS
 
 
-@red
 def test_ac_4_npx_skills_lists_exactly_12_skills():
     npx = shutil.which("npx")
     if npx is None:
@@ -125,13 +120,11 @@ def copy_repo(tmp_path):
     return dest
 
 
-@red
 def test_ac_9_validate_passes_on_repo():
     result = run_validate(ROOT)
     assert result.returncode == 0, result.stdout + result.stderr
 
 
-@red
 def test_ac_9_validate_fails_naming_file_on_version_drift(tmp_path):
     repo = copy_repo(tmp_path)
     gemini = repo / "gemini-extension.json"
@@ -144,7 +137,6 @@ def test_ac_9_validate_fails_naming_file_on_version_drift(tmp_path):
     assert "gemini-extension.json" in result.stdout + result.stderr
 
 
-@red
 def test_ac_9_validate_fails_naming_file_on_name_mismatch(tmp_path):
     repo = copy_repo(tmp_path)
     bad = repo / "skills" / "bad-skill" / "SKILL.md"
@@ -155,7 +147,6 @@ def test_ac_9_validate_fails_naming_file_on_name_mismatch(tmp_path):
     assert "skills/bad-skill/SKILL.md" in result.stdout + result.stderr
 
 
-@red
 def test_ac_9_workflow_runs_validate_on_pull_requests():
     workflow = ROOT / ".github" / "workflows" / "validate.yml"
     assert workflow.is_file()
@@ -171,7 +162,6 @@ def install_section():
     return match.group(1)
 
 
-@red
 def test_ac_10_readme_has_one_labelled_line_per_harness():
     section = install_section()
     harnesses = ["Claude Code", "Codex", "Gemini CLI", "Copilot CLI", "Cursor", "npx skills"]
@@ -181,7 +171,6 @@ def test_ac_10_readme_has_one_labelled_line_per_harness():
         assert "*verified*" in lines[0] or "*documented, untested*" in lines[0], harness
 
 
-@red
 def test_ac_10_readme_notes_copilot_limitation():
     section = install_section()
     assert "Known limitations" in section

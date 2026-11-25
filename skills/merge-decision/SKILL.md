@@ -1,6 +1,6 @@
 ---
 name: merge-decision
-description: Produce the handoff card a maintainer reads instead of the diff before merging a PR: a risk banner from the paths touched, the few items only a human can decide, evidence checked against CI rather than the PR's claims, and an explicit "not verified" list. Use when the user asks "what do I need to watch", "is this safe to merge", "merge decision for PR N", or hands over a PR they will not read line by line.
+description: 'Produce the handoff card a maintainer reads instead of the diff before merging a PR: a risk banner from the paths touched, the few items only a human can decide, evidence checked against CI rather than the PR''s claims, and an explicit "not verified" list. Use when the user asks "what do I need to watch", "is this safe to merge", "merge decision for PR N", or hands over a PR they will not read line by line.'
 ---
 
 Build the card that replaces reading the code. It is written for someone who will decide in a few minutes, so it leads with what they must judge and ends with what nobody checked. It never says "merge"; the decision stays with the human.
