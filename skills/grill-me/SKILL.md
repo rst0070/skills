@@ -1,7 +1,7 @@
 ---
 name: grill-me
-description: A relentless interview to sharpen a plan or design.
+description: Only when the user explicitly asks. A relentless interview to sharpen a plan or design.
 disable-model-invocation: true
 ---
 
-Call the Skill tool with "wonbin:grilling".
+Load `grilling` (in Claude Code: `wonbin:grilling`) and follow it.

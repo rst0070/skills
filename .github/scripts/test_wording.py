@@ -28,7 +28,6 @@ CROSS_REFS = [
     ("tdd", "codebase-design"),
 ]
 
-red = pytest.mark.xfail(strict=True, raises=AssertionError)
 
 
 def skill_text(name):
@@ -41,7 +40,6 @@ def frontmatter(name):
     return yaml.safe_load(text[4:end])
 
 
-@red
 def test_ac_5_no_skill_mentions_the_skill_tool():
     hits = [
         p.relative_to(ROOT).as_posix()
@@ -51,7 +49,6 @@ def test_ac_5_no_skill_mentions_the_skill_tool():
     assert hits == []
 
 
-@red
 def test_ac_5_cross_skill_references_use_bare_name_with_hint():
     for skill, target in CROSS_REFS:
         hint = f"`{target}` (in Claude Code: `wonbin:{target}`)"
@@ -66,7 +63,6 @@ def test_ac_5_cross_skill_references_use_bare_name_with_hint():
             )
 
 
-@red
 @pytest.mark.parametrize("name", MANUAL_ONLY)
 def test_ac_6_manual_only_skill_is_not_implicit(name):
     meta = frontmatter(name)
@@ -78,7 +74,6 @@ def test_ac_6_manual_only_skill_is_not_implicit(name):
     assert policy.get("allow_implicit_invocation") is False
 
 
-@red
 def test_ac_7_spec_to_code_stops_without_sub_agents_before_step_1():
     text = skill_text("spec-to-code")
     guard = re.search(r"If you cannot spawn sub-agents, stop[^\n]*spec-to-code-light", text)
@@ -87,7 +82,6 @@ def test_ac_7_spec_to_code_stops_without_sub_agents_before_step_1():
     assert guard.start() < step_1
 
 
-@red
 @pytest.mark.parametrize("rel", REVIEW_STYLE)
 def test_ac_7_review_style_skill_has_sequential_fallback(rel):
     text = (ROOT / rel).read_text()
@@ -98,13 +92,11 @@ def test_ac_7_review_style_skill_has_sequential_fallback(rel):
     ), rel
 
 
-@red
 @pytest.mark.parametrize("name", ["spec-to-code", "spec-to-code-light"])
 def test_ac_8_repo_discovery_reads_agents_md_before_claude_md(name):
     assert "(AGENTS.md, CLAUDE.md, CONTRIBUTING" in skill_text(name)
 
 
-@red
 def test_pr_2_bumps_every_manifest_to_0_6_1():
     for rel in [".claude-plugin/plugin.json", "plugin.json", "gemini-extension.json"]:
         assert json.loads((ROOT / rel).read_text())["version"] == "0.6.1", rel

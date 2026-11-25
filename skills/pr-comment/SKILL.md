@@ -1,10 +1,10 @@
 ---
 name: pr-comment
-description: Run a two-axis review (Standards + Spec) on a GitHub pull request and post the findings as inline PR review comments with `gh`. Each comment says what the issue is, why it matters, and what to change, with show-me style visuals. Findings that need a human decision @-mention a person, the PR author by default.
+description: Only when the user explicitly asks. Run a two-axis review (Standards + Spec) on a GitHub pull request and post the findings as inline PR review comments with `gh`. Each comment says what the issue is, why it matters, and what to change, with show-me style visuals. Findings that need a human decision @-mention a person, the PR author by default.
 disable-model-invocation: true
 ---
 
-Review a GitHub PR with `wonbin:two-axis-review`, then post each finding as an inline comment on the PR. One review, one notification.
+Review a GitHub PR with `two-axis-review` (in Claude Code: `wonbin:two-axis-review`), then post each finding as an inline comment on the PR. One review, one notification.
 
 ## Process
 
@@ -25,12 +25,13 @@ Run `git fetch origin <baseRefName>`. The fixed point is `origin/<baseRefName>`.
 
 ### 2. Run the two-axis review
 
-Load `wonbin:two-axis-review` with the Skill tool. Follow its steps 1–4 with the fixed point from step 1 and these changes:
+Load `two-axis-review` (in Claude Code: `wonbin:two-axis-review`). Follow its steps 1–4 with the fixed point from step 1 and these changes:
 
 - Add this line to **both** sub-agent briefs: "For every finding, give `path:line` using the line number in the new version of the file, plus an end line if it spans a range. If a finding has no single place in the diff (for example a missing requirement), mark it `unanchored`."
 - Add this line to **both** briefs too: "Mark a finding `needs-human: <the question>` when the code can't settle it and a person must decide. Examples: an ambiguous or contradictory spec line, a product or domain tradeoff, a deliberate-looking deviation from a standard, or a risk to security, data, or money that needs an owner to accept it. Don't mark findings that only need a code fix."
 - Raise each sub-agent's word limit to 600, since the anchors take room.
 - Skip its step 5. This skill does its own aggregation.
+- If you cannot spawn sub-agents, run the two axes one after another in this session and say in the report that the reviews were not independent.
 
 ### 3. Anchor each finding
 
@@ -44,7 +45,7 @@ Keep each finding's axis label. Never merge a Standards finding with a Spec find
 
 ### 4. Write each comment
 
-Load `wonbin:show-me` with the Skill tool and use its formats (diff, pseudocode, call tree, file tree, Mermaid) **inside the comment body**. GitHub renders all of them. Skip its HTML-file option, since a PR comment can't carry one. Pick the smallest visual that makes the point. A one-line rename needs no visual beyond the suggestion.
+Load `show-me` (in Claude Code: `wonbin:show-me`) and use its formats (diff, pseudocode, call tree, file tree, Mermaid) **inside the comment body**. GitHub renders all of them. Skip its HTML-file option, since a PR comment can't carry one. Pick the smallest visual that makes the point. A one-line rename needs no visual beyond the suggestion.
 
 Every comment uses this shape:
 
