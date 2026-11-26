@@ -97,6 +97,6 @@ def test_ac_8_repo_discovery_reads_agents_md_before_claude_md(name):
     assert "(AGENTS.md, CLAUDE.md, CONTRIBUTING" in skill_text(name)
 
 
-def test_pr_2_bumps_every_manifest_to_0_6_1():
+def test_every_manifest_is_at_0_7_0():
     for rel in [".claude-plugin/plugin.json", "plugin.json", "gemini-extension.json"]:
-        assert json.loads((ROOT / rel).read_text())["version"] == "0.6.1", rel
+        assert json.loads((ROOT / rel).read_text())["version"] == "0.7.0", rel
