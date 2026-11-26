@@ -41,6 +41,8 @@ Mark each claim `VERIFIED (<check or command>)` or `UNBACKED`. A ticked checkbox
 
 Brief: the spec's ACs (or the PR's intent, if no spec), the diff, the test files in the diff. Task: for each AC, `PASS` / `FAIL` / `UNCERTAIN` with the test name and `path:line` that shows it, one line of reason. Also list behavior in the diff that no AC asked for. Under 400 words.
 
+If you cannot spawn sub-agents, run the audit one after another in this session and say in the report that the audit and the rest of the card were not independent.
+
 ## 4. Check drift and tests
 
 Mechanical, by you:

@@ -1,16 +1,18 @@
 ---
 name: spec-to-code
-description: Implement a ready task spec end to end and open a draft PR, using separate sub-agents for tests, implementation, review, and refutation so none of them can grade its own work. The user says where the spec is in plain words ("the spec is docs/specs/foo.md", a Notion link, a pasted block). Use when the user says "implement the spec", "spec to code", "build this from the spec", or hands over a spec and asks for a PR.
+description: Only when the user explicitly asks. Implement a ready task spec end to end and open a draft PR, using separate sub-agents for tests, implementation, review, and refutation so none of them can grade its own work. The user says where the spec is in plain words ("the spec is docs/specs/foo.md", a Notion link, a pasted block). Use when the user says "implement the spec", "spec to code", "build this from the spec", or hands over a spec and asks for a PR.
 disable-model-invocation: true
 ---
 
 Orchestrate the spec → PR loop. This skill never writes code itself: it briefs sub-agents, checks their output mechanically, and stops when a check fails. The spec is the only input; if the spec cannot answer a question, the loop stops and hands the question back.
 
+If you cannot spawn sub-agents, stop here, before step 1, and suggest `spec-to-code-light` (in Claude Code: `wonbin:spec-to-code-light`), which runs the same loop in one session.
+
 ## 0. Read the spec and the repo
 
 **Spec.** Read it from wherever the user pointed (file, URL, pasted text). It must have, in some form: intent, acceptance criteria (numbered AC-n), scope with never-touch paths, a PR plan, and a verification plan. If any is missing, or an open `[NEEDS CLARIFICATION]` remains, stop and list what is missing. Do not guess a spec into readiness.
 
-**Repo.** Discover from the repo's own files (CLAUDE.md, CONTRIBUTING, Makefile, package.json, pyproject, CI config) and state in one message before starting:
+**Repo.** Discover from the repo's own files (AGENTS.md, CLAUDE.md, CONTRIBUTING, Makefile, package.json, pyproject, CI config) and state in one message before starting:
 
 - test command and the test directory globs
 - base branch and branch naming

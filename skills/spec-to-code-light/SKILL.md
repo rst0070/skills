@@ -1,6 +1,6 @@
 ---
 name: spec-to-code-light
-description: Implement a ready task spec test-first in the current session, with no sub-agents and no review step, and open a draft PR for each PR the spec plans. A cheaper sibling of spec-to-code; git checks, not separate agents, keep the tests honest. The user says where the spec is in plain words ("the spec is docs/specs/foo.md", a Notion link, a pasted block). Use when the user says "spec to code light", "implement the spec, light", or wants a spec built without the full multi-agent loop.
+description: Only when the user explicitly asks. Implement a ready task spec test-first in the current session, with no sub-agents and no review step, and open a draft PR for each PR the spec plans. A cheaper sibling of spec-to-code; git checks, not separate agents, keep the tests honest. The user says where the spec is in plain words ("the spec is docs/specs/foo.md", a Notion link, a pasted block). Use when the user says "spec to code light", "implement the spec, light", or wants a spec built without the full multi-agent loop.
 disable-model-invocation: true
 ---
 
@@ -14,7 +14,7 @@ Writing both the tests and the code yourself saves tokens. What you give up is a
 
 **PRs come from the spec.** Open the PRs the spec's PR plan lists, in its order, with its base branches. If the spec has no PR plan, open one PR. Never split or merge PRs on your own judgement.
 
-**Repo.** Find these in the repo's own files (CLAUDE.md, CONTRIBUTING, Makefile, package.json, pyproject, CI config). State them in one message before you start:
+**Repo.** Find these in the repo's own files (AGENTS.md, CLAUDE.md, CONTRIBUTING, Makefile, package.json, pyproject, CI config). State them in one message before you start:
 
 - test command and test directory globs
 - base branch and branch naming
