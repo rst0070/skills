@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "wonbin",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "description": "Design, TDD, two-axis review, PR comments, spec-discuss / spec-to-code / merge-decision loop, grilling and visual explanation skills.",
   "license": "MIT"
 }

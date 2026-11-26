@@ -197,9 +197,15 @@ def test_description_names_spec_first_suggestion():
 
 
 def section_starting(title):
-    """Body of the numbered step whose title starts with `title`."""
+    """Heading and body of the numbered step whose title starts with `title`.
+
+    Ends at the next numbered step or `## Rules`, so `##` headings inside the
+    card template stay in the step.
+    """
     match = re.search(
-        rf"^## \d+\. {re.escape(title)}[^\n]*\n(.*?)(?=^## |\Z)", text(), re.S | re.M
+        rf"^(## \d+\. {re.escape(title)}.*?)(?=^## (?:\d+\.|Rules)|\Z)",
+        text(),
+        re.S | re.M,
     )
     assert match, f"no step starting '{title}'"
     return match.group(1)
