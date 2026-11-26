@@ -63,7 +63,7 @@ if the three versions differ.
 | `spec-to-code`    | Implement a ready spec with test-author / developer / reviewer / refuter sub-agents and open a draft PR (`/wonbin:spec-to-code`) | Local |
 | `spec-to-code-light` | Implement a ready spec test-first in one session, no sub-agents or review; git checks keep the tests frozen after red (`/wonbin:spec-to-code-light`) | Local |
 | `good-code`       | Reference on what good code is, architecturally: dependency direction, seams, contracts, vocabulary, failure, ownership, enforcement. Information only | Local |
-| `merge-decision`  | Handoff card for a maintainer who will not read the diff: risk tier, evidence vs CI, not-verified list | Local |
+| `merge-decision`  | Spec-first brief for a reviewer who will not read the diff: spec vs code as a diagram and table, a MERGE/HOLD suggestion with evidence-tied confidence, at most three calls for the human | Local |
 
 All vendored skills are MIT licensed; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
 
